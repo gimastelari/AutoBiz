@@ -1,0 +1,42 @@
+#NECESSARY LIBRARIES INSTALLED 
+#!PIP INSTALL PANDAS NUMPY MATPLOTLIB SCIKIT_LEARN 
+
+# Import Libraries 
+import pandas as pd #used for data manipulation and analysis 
+import numpy as np #used for numerical operations
+import matplotlib.pyplot as plt #used for creating static, animated, and interactive visualizations
+from sklearn.model_selection import train_test_split #used for splitting data into training and testing sets
+from sklearn.linear_model import LinearRegression #used for linear regression modeling 
+from sklearn.metrics import mean_squared_error #evaluating the performance of the regression model 
+
+# Load Data 
+data = pd.read_csv('bid_list.csv') #loads data from csv file into a pandas DataFrame called data
+
+# Preview the data 
+print(data.head()) #displays the first 5 rows of the DataFrame 'data' to give an overview of the data structure and contents 
+
+# Check for missing values 
+print(data.insull().sum()) #insull detects missing values and sum aggregates he total number of missing values per column. resulting in how many missing values per column on the console
+
+
+
+# DATA COLLECTION & PREPARATION 
+# CLEANING AND PREPARING DATA FOR ANALYSIS AND MODELING 
+
+# Handle Missing Values 
+data = data.dropna()
+
+#Encoding Categorical Variables 
+data = pd.get_dummies(data, drop_first=True)
+
+
+# Splitting Data into Features X and target y 
+X = data.drop('target_column_name', axis=1)
+y = data['target_column_name']
+
+# Split the data into training and testing sets 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_sstate=42)
+
+# Confirm the split 
+print(f"Training set size: {X_train.shape[0]}")
+print(f"Testing set size: {X_test.shape[0]}")
